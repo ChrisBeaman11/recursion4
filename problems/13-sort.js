@@ -22,8 +22,31 @@ sort([]); // []
 ***********************************************************************/
 
 function sort(nums, sorted = []) {
-    // Your code here
+//    console.log("nums array: ", nums)
+    if (!nums.length) return sorted;
+
+    let smallest = Infinity;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < smallest) {
+            smallest = nums[i];
+        }
+    }
+    console.log("current smallest: ",smallest)
+
+    sorted.push(smallest);
+    console.log("new arr: ", sorted)
+
+    nums.splice(nums.indexOf(smallest), 1);
+
+//    console.log(sort(nums))
+
+    return sorted.concat(sort(nums));
 }
+
+let a = sort([4,1,6,3,1,7]); // [1, 1, 3, 4, 6, 7]
+console.log(a)
+//sort([0, 1, -3]); // [-3, 0, 1]
+//sort([]); // []
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 module.exports = sort;
