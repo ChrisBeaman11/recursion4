@@ -35,8 +35,19 @@ console.log(x[0] === y[0]) // true
 
 
 function deepDup(arr) {
-  // Your code here
+  let duped = [];
+  if(arr.length === duped) return duped;
+  duped.push(arr[0]);
+  arr.shift();
+  return deepDup(arr);
 }
+let arr = [[1], [2, [3]]];
+
+duped = deepDup(arr); // [[1], [2, [3]]]
+console.log(arr);
+// console.log(arr[0] === duped[0]) // false
+// console.log(arr[1] === duped[1]) // false
+// console.log(arr[1][1] === duped[1][1]) // false
 
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
