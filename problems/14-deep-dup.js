@@ -17,14 +17,6 @@ array with different memory addresses.
 Write a function, deepDup(arr), that deeply duplicates a given array. Your duplicated array,
 when compared to various indexes of the original array, should evaluate to false like below.
 
-Examples:
-
-let arr = [[1], [2, [3]]];
-duped = deepDup(arr); // [[1], [2, [3]]]
-arr[0] === duped[0] // false
-arr[1] === duped[1] // false
-arr[1][1] === duped[1][1] // false
-
 Note:
 if you compare a 1 dimensional array of numbers like below,
 you will get 'true' because we are comparing numbers.
@@ -33,21 +25,38 @@ let y = x.slice();
 console.log(x[0] === y[0]) // true
 ***********************************************************************/
 
+// basecase: when array is empty - return duped
+// Q: since we compare both the arrays below, are we supposed to keep the original array as it is?
+
+// deep copy : the og array needs to be modified (deconstructed down to 0)
+
 
 function deepDup(arr) {
-  let duped = [];
-  if(arr.length === duped) return duped;
-  duped.push(arr[0]);
-  arr.shift();
-  return deepDup(arr);
+  let newArr = [];
+
+  // check if element is array
+   for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      //if so use spread operator to access inside value
+
+      newArr.push(deepDup(arr[i]));
+    } else {
+      newArr.push(arr[i]);
+    }
+    console.log(newArr)
+  }
+
+//  console.log("newArr: ",newArr)
+  return newArr;
 }
+
 let arr = [[1], [2, [3]]];
 
 duped = deepDup(arr); // [[1], [2, [3]]]
 console.log(arr);
-// console.log(arr[0] === duped[0]) // false
-// console.log(arr[1] === duped[1]) // false
-// console.log(arr[1][1] === duped[1][1]) // false
+console.log(arr[0] === duped[0]) // false
+console.log(arr[1] === duped[1]) // false
+console.log(arr[1][1] === duped[1][1]) // false
 
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
